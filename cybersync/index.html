@@ -593,6 +593,14 @@
     <script type="text/javascript">
       const codePlace = document.getElementById("qrcode");
       const numeric = document.getElementById("numeric");
+      //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
+      const timeOptions = {
+        hour12: false,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        fractionalSecondDigits: 2,
+      };
 
       let loop;
 
@@ -606,9 +614,10 @@
       });
       codePlace.replaceChildren(svg);
 
-      numeric.innerText = `${timeString.toLocaleTimeString()}.${Math.floor(
-        timeString.getMilliseconds() / 100
-      )}`;
+      // numeric.innerText = `${timeString.toLocaleTimeString()}.${Math.floor(
+      //   timeString.getMilliseconds() / 100
+      // )}`;
+      numeric.innerText = timeString.toLocaleTimeString("sv", timeOptions);
 
       const timeLoop = () => {
         loop = setInterval(() => {
@@ -624,9 +633,12 @@
           });
           codePlace.replaceChildren(svg);
 
-          numeric.innerText = `${timeString.toLocaleTimeString()}.${Math.floor(
-            timeString.getMilliseconds() / 100
-          )}`;
+          // numeric.innerText = `${timeString.toLocaleTimeString(
+          //   "sv",
+          //   timeOptions
+          // )}.${Math.floor(timeString.getMilliseconds() / 100)}`;
+
+          numeric.innerText = timeString.toLocaleTimeString("sv", timeOptions);
         }, 100);
       };
 
@@ -647,7 +659,5 @@
       //   let servertime <!--# echo var="date_gmt" default="no" -->;
       // })();
     </script>
-
-
   </body>
 </html>
